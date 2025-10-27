@@ -8,6 +8,10 @@
     ".": {
       "require": "./dist/dialexis.js",
       "types": "./dist/src/index.d.ts"
+    },
+    "./spark": {
+      "require": "./dist/spark.js",
+      "types": "./dist/src/spark/index.d.ts"
     }
   },
   "files": [
@@ -17,12 +21,11 @@
     "build": "NODE_ENV=production webpack",
     "watch": "NODE_ENV=development webpack --watch",
     "prettier": "prettier . --write --ignore-unknown",
-    "prepare": "husky",
+    "prepare": "husky && npm run build",
     "test": "jest"
   },
   "author": "Brian Yu <brian@brianyu.me>",
   "license": "GPL-3.0-or-later",
-  "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^9.35.0",
     "@types/jest": "^30.0.0",
@@ -40,6 +43,9 @@
     "typescript-eslint": "^8.43.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^6.0.1"
+  },
+  "peerDependencies": {
+    "presenter": "^0.6.0"
   },
   "lint-staged": {
     "**/*": [

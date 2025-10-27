@@ -17,6 +17,14 @@ module.exports = [
           type: "umd",
         },
       },
+      spark: {
+        import: "./src/spark/index.ts",
+        filename: "spark.js",
+        library: {
+          name: "DialexisSpark",
+          type: "umd",
+        },
+      },
     },
     output: {
       // filename: "[name].js",
@@ -38,6 +46,9 @@ module.exports = [
           exclude: [/node_modules/, /dist/],
         },
       ],
+    },
+    externals: {
+      presenter: "presenter",
     },
   },
 ];
