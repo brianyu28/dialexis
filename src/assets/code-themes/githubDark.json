@@ -1,0 +1,182 @@
+{
+  "backgroundColor": "#0a0a0a",
+  "//comment": "Pygments GitHub Dark theme with a darker background color.",
+  "styles": {
+    "": {
+      "color": "#e6edf3",
+      "bold": false
+    },
+    "Error": {
+      "color": "#f85149",
+      "bold": false
+    },
+    "Keyword": {
+      "color": "#ff7b72",
+      "bold": false
+    },
+    "Keyword.Constant": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Keyword.Pseudo": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Name": {
+      "color": "#e6edf3",
+      "bold": false
+    },
+    "Name.Class": {
+      "color": "#f0883e",
+      "bold": true
+    },
+    "Name.Constant": {
+      "color": "#79c0ff",
+      "bold": true
+    },
+    "Name.Decorator": {
+      "color": "#d2a8ff",
+      "bold": true
+    },
+    "Name.Entity": {
+      "color": "#ffa657",
+      "bold": false
+    },
+    "Name.Exception": {
+      "color": "#f0883e",
+      "bold": true
+    },
+    "Name.Function": {
+      "color": "#d2a8ff",
+      "bold": true
+    },
+    "Name.Label": {
+      "color": "#79c0ff",
+      "bold": true
+    },
+    "Name.Namespace": {
+      "color": "#ff7b72",
+      "bold": false
+    },
+    "Name.Property": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Name.Tag": {
+      "color": "#7ee787",
+      "bold": false
+    },
+    "Name.Variable": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Literal": {
+      "color": "#a5d6ff",
+      "bold": false
+    },
+    "Literal.Date": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Literal.String": {
+      "color": "#a5d6ff",
+      "bold": false
+    },
+    "Literal.String.Affix": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Literal.String.Delimiter": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Literal.String.Escape": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Literal.String.Heredoc": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Literal.String.Regex": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Literal.Number": {
+      "color": "#a5d6ff",
+      "bold": false
+    },
+    "Comment": {
+      "color": "#8b949e",
+      "bold": false
+    },
+    "Comment.Preproc": {
+      "color": "#8b949e",
+      "bold": true
+    },
+    "Comment.Special": {
+      "color": "#8b949e",
+      "bold": true
+    },
+    "Operator": {
+      "color": "#ff7b72",
+      "bold": true
+    },
+    "Generic": {
+      "color": "#e6edf3",
+      "bold": false
+    },
+    "Generic.Deleted": {
+      "color": "#ffa198",
+      "bold": false
+    },
+    "Generic.Emph": {
+      "color": null,
+      "bold": false
+    },
+    "Generic.Error": {
+      "color": "#ffa198",
+      "bold": false
+    },
+    "Generic.Heading": {
+      "color": "#79c0ff",
+      "bold": true
+    },
+    "Generic.Inserted": {
+      "color": "#56d364",
+      "bold": false
+    },
+    "Generic.Output": {
+      "color": "#8b949e",
+      "bold": false
+    },
+    "Generic.Prompt": {
+      "color": "#8b949e",
+      "bold": false
+    },
+    "Generic.Strong": {
+      "color": null,
+      "bold": true
+    },
+    "Generic.EmphStrong": {
+      "color": null,
+      "bold": true
+    },
+    "Generic.Subheading": {
+      "color": "#79c0ff",
+      "bold": false
+    },
+    "Generic.Traceback": {
+      "color": "#ff7b72",
+      "bold": false
+    },
+    "Generic.Underline": {
+      "color": null,
+      "bold": false
+    },
+    "Text.Whitespace": {
+      "color": "#6e7681",
+      "bold": false
+    }
+  }
+}

@@ -8,6 +8,7 @@
     "noImplicitAny": true,
     "noUncheckedIndexedAccess": true,
     "outDir": "./dist/",
+    "resolveJsonModule": true,
     "sourceMap": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
