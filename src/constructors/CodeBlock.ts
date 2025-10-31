@@ -1,11 +1,11 @@
 import { Color, getTextContentLength, Group, Mask, Rectangle, Text } from "presenter";
 
-import githubDark from "../../assets/code-themes/githubDark.json";
-import { ThemeFont, ThemeFontSize, ThemeRounding } from "../theme";
+import githubDark from "../assets/code-themes/githubDark.json";
 import { CodeBlockContent } from "../types/CodeBlockContent";
 import { CodeBlockTheme } from "../types/CodeBlockTheme";
 import { getCodeBlockTextUnits } from "../utils/getCodeBlockTextUnits";
 
+const DEFAULT_CODE_FONT = "'Noto Sans Mono', monospace";
 const LINE_NUMBER_SPACE_CHARS = 2;
 
 // Default values assume Noto Sans Mono font
@@ -23,11 +23,20 @@ interface FocusAdjustmentProps {
 }
 
 interface Return {
-  /** Group object containing the code block. */
+  /**
+   * Group object containing the code block.
+   * This is what should be added to the slide for rendering.
+   */
   readonly block: Group;
 
-  /** Focus rectangle. */
+  /**  Group object containing just code and line numbers, used to animate scrolling. */
+  readonly content: Group;
+
+  /** Focus rectangle, used to animate focus rectangle. */
   readonly focus: Rectangle;
+
+  /** Function to get new position data for content element. */
+  readonly getContentPosition: (scrollLine: number, scrollCol?: number) => { x: number; y: number };
 
   /** Function to get new position data for focus element. */
   readonly getFocusPosition: (
@@ -43,10 +52,10 @@ interface Return {
     height: number;
   };
 
-  /** Text object within the code block. */
+  /** Text object within the code block, used to animate text write-on. */
   readonly text: Text;
 
-  /** Number of characters in the code block. */
+  /** Number of characters in the code block, used to animate text write-on. */
   readonly length: number;
 }
 
@@ -95,6 +104,7 @@ interface CodeBlockProps {
   readonly focusPaddingY: number;
   readonly focusRounding: number;
 
+  readonly fontFamily: string;
   readonly isBackgroundVisible: boolean;
 
   /**
@@ -132,9 +142,9 @@ interface CodeBlockProps {
 
 export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBlockProps>): Return {
   const {
-    areLineNumbersVisible = true,
+    areLineNumbersVisible = false,
     backgroundColor = null,
-    backgroundRounding = ThemeRounding.SMALL,
+    backgroundRounding = 10,
     characterDescentHeight = DEFAULT_CHARACTER_DESCENT_HEIGHT,
     characterWidth = DEFAULT_CHARACTER_WIDTH,
     colCount = null,
@@ -149,6 +159,7 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     focusOffsetX = 0,
     focusOffsetY = 0,
     focusRounding = 0,
+    fontFamily = DEFAULT_CODE_FONT,
     groupProps = {},
     isBackgroundVisible = true,
     isFocusVisible = false,
@@ -161,25 +172,14 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     textProps = {},
     theme = githubDark,
   } = props;
-  const fontSize = textProps.fontSize ?? ThemeFontSize.NORMAL;
+  const fontSize = textProps.fontSize ?? 100;
   const lineSpacing = textProps.lineSpacing ?? 1.15;
-  let textUnits = getCodeBlockTextUnits(code, theme);
+  const textUnits = getCodeBlockTextUnits(code, theme);
 
   const maxLineNumber = String(firstLineNumber + textUnits.length - 1);
   const lineNumberCharCount = areLineNumbersVisible
     ? maxLineNumber.length + LINE_NUMBER_SPACE_CHARS
     : 0;
-  if (areLineNumbersVisible) {
-    textUnits = textUnits.map((line, i) => [
-      {
-        text:
-          String(firstLineNumber + i).padStart(lineNumberCharCount - LINE_NUMBER_SPACE_CHARS, " ") +
-          " ".repeat(LINE_NUMBER_SPACE_CHARS),
-        color: lineNumberColor,
-      },
-      ...line,
-    ]);
-  }
 
   const maxCharactersPerLine = Math.max(
     ...textUnits.map((line) => line.reduce((sum, unit) => sum + unit.text.length, 0)),
@@ -195,14 +195,39 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     lineSpacing,
   });
 
+  let lineNumbers: Text | null = null;
+  if (areLineNumbersVisible) {
+    lineNumbers = Text(
+      textUnits.map((_, i) => [
+        {
+          text:
+            String(firstLineNumber + i).padStart(
+              lineNumberCharCount - LINE_NUMBER_SPACE_CHARS,
+              " ",
+            ) + " ".repeat(LINE_NUMBER_SPACE_CHARS),
+          color: lineNumberColor,
+        },
+      ]),
+      {
+        fontFamily,
+        fontSize,
+        lineSpacing,
+        ...textProps,
+        length: null,
+        x: 0,
+        y: 0,
+      },
+    );
+  }
+
   const length = getTextContentLength(textUnits);
   const text = Text(textUnits, {
-    fontFamily: ThemeFont.CODE,
+    fontFamily,
     fontSize,
     lineSpacing,
     ...textProps,
-    x: padding - (scrollCol - 1) * characterWidth * fontSize,
-    y: padding - (scrollLine - 1) * lineHeight * lineSpacing * fontSize,
+    x: lineNumberCharCount * characterWidth * fontSize,
+    y: 0,
   });
 
   const background = Rectangle({
@@ -221,19 +246,15 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     adjustments: FocusAdjustmentProps,
   ): { x: number; y: number; width: number; height: number } {
     const {
-      focusPaddingX = 0,
-      focusPaddingY = 0,
-      focusOffsetX = 0,
-      focusOffsetY = 0,
+      focusPaddingX: paddingX = focusPaddingX,
+      focusPaddingY: paddingY = focusPaddingY,
+      focusOffsetX: offsetX = focusOffsetX,
+      focusOffsetY: offsetY = focusOffsetY,
     } = adjustments ?? {};
     return {
-      x: padding + (focusColStart - 1) * characterWidth * fontSize - focusPaddingX + focusOffsetX,
-      y:
-        padding +
-        (focusLineStart - 1) * lineHeight * lineSpacing * fontSize -
-        focusPaddingY +
-        focusOffsetY,
-      width: (focusColEnd - focusColStart + 1) * characterWidth * fontSize + focusPaddingX * 2,
+      x: (lineNumberCharCount + focusColStart - 1) * characterWidth * fontSize - paddingX + offsetX,
+      y: (focusLineStart - 1) * lineHeight * lineSpacing * fontSize - paddingY + offsetY,
+      width: (focusColEnd - focusColStart + 1) * characterWidth * fontSize + paddingX * 2,
       height:
         getHeightForLines({
           descenderHeight: characterDescentHeight,
@@ -242,7 +263,7 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
           lineHeight,
           lineSpacing,
         }) +
-        focusPaddingY * 2,
+        paddingY * 2,
     };
   }
 
@@ -258,7 +279,18 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     opacity: isFocusVisible ? 1 : 0,
   });
 
-  const mask = Mask([focus, text], {
+  function getContentPosition(scrollLine: number, scrollCol: number = 1): { x: number; y: number } {
+    return {
+      x: padding - (scrollCol - 1) * characterWidth * fontSize,
+      y: padding - (scrollLine - 1) * lineHeight * lineSpacing * fontSize,
+    };
+  }
+
+  const content = Group([...(lineNumbers !== null ? [lineNumbers] : []), focus, text], {
+    ...getContentPosition(scrollLine, scrollCol),
+  });
+
+  const mask = Mask([content], {
     width: blockWidth + padding * 2,
     height: blockHeight + padding * 2,
   });
@@ -269,7 +301,15 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     ...groupProps,
   });
 
-  return { block, focus, getFocusPosition, length, text };
+  return {
+    block,
+    content,
+    focus,
+    getContentPosition,
+    getFocusPosition,
+    length,
+    text,
+  };
 }
 
 interface HeightForLinesProps {
