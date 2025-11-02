@@ -3,6 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
+    "exactOptionalPropertyTypes": true,
     "module": "node16",
     "moduleResolution": "node16",
     "noImplicitAny": true,

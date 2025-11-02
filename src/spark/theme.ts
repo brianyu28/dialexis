@@ -7,6 +7,7 @@ export const ThemeAnchor = {
 export const ThemeColor = {
   BACKGROUND: Color(28, 28, 28),
   BLACK: Color(0, 0, 0),
+  PRIMARY: Color(255, 255, 255),
   TEXT: Color(255, 255, 255),
 
   BLUE1: Color(125, 157, 224),
@@ -18,7 +19,11 @@ export const ThemeFont = {
 } as const;
 
 export const ThemeFontSize = {
-  NORMAL: 100,
+  SMALL: 80,
+  NORMAL: 110,
+  MEDIUM: 160,
+  LARGE: 200,
+  XLARGE: 230,
 };
 
 export const ThemeRounding = {
