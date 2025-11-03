@@ -45,7 +45,7 @@
     "webpack-cli": "^6.0.1"
   },
   "peerDependencies": {
-    "presenter": "^0.6.2"
+    "presenter": "^0.6.3"
   },
   "lint-staged": {
     "**/*": [

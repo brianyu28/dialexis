@@ -6,11 +6,30 @@ export const ThemeAnchor = {
 
 export const ThemeColor = {
   BACKGROUND: Color(28, 28, 28),
-  BLACK: Color(0, 0, 0),
   PRIMARY: Color(255, 255, 255),
   TEXT: Color(255, 255, 255),
 
-  BLUE1: Color(125, 157, 224),
+  BLACK: Color(0, 0, 0),
+  WHITE: Color(255, 255, 255),
+
+  GRAY1: Color(106, 106, 106), // Medium gray
+  GRAY2: Color(65, 65, 65), // Dark gray
+  GRAY3: Color(224, 224, 224), // Light gray
+
+  BLUE1: Color(125, 157, 224), // Light blue
+  BLUE2: Color(51, 56, 215), // Dark blue
+
+  GREEN1: Color(102, 208, 89), // Light green
+  GREEN2: Color(73, 143, 64), // Dark green
+
+  PURPLE1: Color(136, 83, 173), // Medium purple
+  PURPLE2: Color(178, 126, 215), // Light purple
+
+  RED1: Color(225, 103, 103), // Light red
+  RED2: Color(182, 75, 75), // Dark red
+
+  YELLOW1: Color(240, 243, 90), // Medium yellow
+  YELLOW2: Color(231, 249, 147), // Lighter yellow
 } as const;
 
 export const ThemeFont = {
