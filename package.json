@@ -1,6 +1,6 @@
 {
   "name": "dialexis",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "description": "Presentation library built with Presenter.js",
   "main": "dist/dialexis.js",
   "types": "dist/index.d.ts",
@@ -45,7 +45,7 @@
     "webpack-cli": "^6.0.1"
   },
   "peerDependencies": {
-    "presenter": "^0.6.3"
+    "presenter": "^0.6.4"
   },
   "lint-staged": {
     "**/*": [

@@ -3,6 +3,7 @@ import { Color, getTextContentLength, Group, Mask, Rectangle, Text } from "prese
 import githubDark from "../assets/code-themes/githubDark.json";
 import { CodeBlockContent } from "../types/CodeBlockContent";
 import { CodeBlockTheme } from "../types/CodeBlockTheme";
+import { CodeFragment } from "../types/CodeFragment";
 import { getCodeBlockTextUnits } from "../utils/getCodeBlockTextUnits";
 
 const DEFAULT_CODE_FONT = "'Noto Sans Mono', monospace";
@@ -35,6 +36,9 @@ interface Return {
   /** Focus rectangle, used to animate focus rectangle. */
   readonly focus: Rectangle;
 
+  /** Fragment text, equal in length to the number of input fragments. */
+  readonly fragments: Text[];
+
   /** Function to get new position data for content element. */
   readonly getContentPosition: (scrollLine: number, scrollCol?: number) => { x: number; y: number };
 
@@ -51,6 +55,9 @@ interface Return {
     width: number;
     height: number;
   };
+
+  /** Function to get new position data for fragment element. */
+  readonly getFragmentPosition: (line: number, col: number) => { x: number; y: number };
 
   /** Text object within the code block, used to animate text write-on. */
   readonly text: Text;
@@ -88,6 +95,9 @@ interface CodeBlockProps {
   readonly colCount: number | null;
 
   readonly firstLineNumber: number;
+
+  // Array of code fragments to be displayed in the code block.
+  readonly fragments: CodeFragment[];
 
   /**
    * Focus adds a highlight behind a particular section of the code.
@@ -160,6 +170,7 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     focusOffsetY = 0,
     focusRounding = 0,
     fontFamily = DEFAULT_CODE_FONT,
+    fragments = [],
     groupProps = {},
     isBackgroundVisible = true,
     isFocusVisible = false,
@@ -230,6 +241,25 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     y: 0,
   });
 
+  const fragmentTexts = fragments.map((fragment) => {
+    const textUnits = getCodeBlockTextUnits(fragment.code, theme);
+    return Text(textUnits, {
+      fontFamily,
+      fontSize,
+      lineSpacing,
+      ...fragment.textProps,
+      x: (lineNumberCharCount + fragment.startCol - 1) * characterWidth * fontSize,
+      y: (fragment.startLine - 1) * lineHeight * lineSpacing * fontSize,
+    });
+  });
+
+  function getFragmentPosition(line: number, col: number): { x: number; y: number } {
+    return {
+      x: (lineNumberCharCount + col - 1) * characterWidth * fontSize,
+      y: (line - 1) * lineHeight * lineSpacing * fontSize,
+    };
+  }
+
   const background = Rectangle({
     width: blockWidth + padding * 2,
     height: blockHeight + padding * 2,
@@ -286,9 +316,12 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     };
   }
 
-  const content = Group([...(lineNumbers !== null ? [lineNumbers] : []), focus, text], {
-    ...getContentPosition(scrollLine, scrollCol),
-  });
+  const content = Group(
+    [...(lineNumbers !== null ? [lineNumbers] : []), focus, text, ...fragmentTexts],
+    {
+      ...getContentPosition(scrollLine, scrollCol),
+    },
+  );
 
   const mask = Mask([content], {
     width: blockWidth + padding * 2,
@@ -305,8 +338,10 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     block,
     content,
     focus,
+    fragments: fragmentTexts,
     getContentPosition,
     getFocusPosition,
+    getFragmentPosition,
     length,
     text,
   };
