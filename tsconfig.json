@@ -10,10 +10,11 @@
     "noUncheckedIndexedAccess": true,
     "outDir": "./dist/",
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
     "target": "es5"
   },
-  "exclude": ["./packages", "./dist", "./webpack.config.js"]
+  "exclude": ["./packages", "./dist", "./vite.config.ts"]
 }
