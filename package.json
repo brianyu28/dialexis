@@ -43,7 +43,7 @@
     "vite": "^6.3.5"
   },
   "peerDependencies": {
-    "presenter": "^0.6.5"
+    "presenter": "^0.7.0"
   },
   "lint-staged": {
     "**/*": [
