@@ -10,11 +10,12 @@
     "noUncheckedIndexedAccess": true,
     "outDir": "./dist/",
     "resolveJsonModule": true,
+    "rootDir": "./src",
     "skipLibCheck": true,
     "sourceMap": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
-    "target": "es6"
+    "target": "ES2022"
   },
   "exclude": ["./packages", "./dist", "./vite.config.ts", "./eslint.config.mts", "./jest.config.js"]
 }

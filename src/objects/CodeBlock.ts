@@ -273,7 +273,7 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
     focusLineEnd: number,
     focusColStart: number,
     focusColEnd: number,
-    adjustments: FocusAdjustmentProps,
+    adjustments?: FocusAdjustmentProps,
   ): { x: number; y: number; width: number; height: number } {
     const {
       focusPaddingX: paddingX = focusPaddingX,
