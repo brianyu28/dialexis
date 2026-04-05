@@ -5,7 +5,6 @@ export default defineConfig({
     lib: {
       entry: {
         dialexis: "src/index.ts",
-        spark: "src/spark/index.ts",
       },
       formats: ["es"],
     },

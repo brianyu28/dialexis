@@ -14,7 +14,7 @@
     "sourceMap": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
-    "target": "es5"
+    "target": "es6"
   },
-  "exclude": ["./packages", "./dist", "./vite.config.ts"]
+  "exclude": ["./packages", "./dist", "./vite.config.ts", "./eslint.config.mts", "./jest.config.js"]
 }

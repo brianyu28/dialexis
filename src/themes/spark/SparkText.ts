@@ -1,39 +1,42 @@
 import { FontWeight, Text as NativeText, TextContent } from "presenter";
 
-import { ThemeColor, ThemeFont, ThemeFontSize } from "../theme";
+import { SparkColor, SparkFont, SparkFontSize } from "./SparkConstants";
 
 const textProps: Partial<NativeText> = {
-  color: ThemeColor.TEXT,
-  fontFamily: ThemeFont.PRIMARY,
-  fontSize: ThemeFontSize.NORMAL,
+  color: SparkColor.TEXT,
+  fontFamily: SparkFont.PRIMARY,
+  fontSize: SparkFontSize.NORMAL,
 };
 
-export function Text(content: TextContent, props: Partial<NativeText> | null = null): NativeText {
+export function SparkText(
+  content: TextContent,
+  props: Partial<NativeText> | null = null,
+): NativeText {
   return NativeText(content, {
     ...textProps,
     ...props,
   });
 }
 
-export function MainTitleText(
+export function SparkMainTitleText(
   content: TextContent,
   props: Partial<NativeText> | null = null,
 ): NativeText {
   return NativeText(content, {
     ...textProps,
-    fontSize: ThemeFontSize.XLARGE,
+    fontSize: SparkFontSize.XLARGE,
     fontWeight: FontWeight.BOLD,
     ...props,
   });
 }
 
-export function TitleText(
+export function SparkTitleText(
   content: TextContent,
   props: Partial<NativeText> | null = null,
 ): NativeText {
   return NativeText(content, {
     ...textProps,
-    fontSize: ThemeFontSize.LARGE,
+    fontSize: SparkFontSize.LARGE,
     fontWeight: FontWeight.BOLD,
     ...props,
   });

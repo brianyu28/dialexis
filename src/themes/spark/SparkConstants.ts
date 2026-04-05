@@ -1,10 +1,6 @@
-import { Anchor, Color } from "presenter";
+import { Color } from "presenter";
 
-export const ThemeAnchor = {
-  PRIMARY: Anchor.CENTER,
-} as const;
-
-export const ThemeColor = {
+export const SparkColor = {
   BACKGROUND: Color(28, 28, 28),
   PRIMARY: Color(255, 255, 255),
   TEXT: Color(255, 255, 255),
@@ -32,12 +28,12 @@ export const ThemeColor = {
   YELLOW2: Color(231, 249, 147), // Lighter yellow
 } as const;
 
-export const ThemeFont = {
+export const SparkFont = {
   PRIMARY: "'Open Sans', sans-serif",
   CODE: "'Noto Sans Mono', monospace",
 } as const;
 
-export const ThemeFontSize = {
+export const SparkFontSize = {
   SMALL: 80,
   NORMAL: 110,
   MEDIUM: 160,
@@ -45,13 +41,13 @@ export const ThemeFontSize = {
   XLARGE: 230,
 };
 
-export const ThemeRounding = {
+export const SparkRounding = {
   SMALL: 10,
   NORMAL: 20,
   LARGE: 30,
 } as const;
 
-export const ThemeSize = {
+export const SparkSize = {
   PRIMARY: {
     width: 3840,
     height: 2160,
