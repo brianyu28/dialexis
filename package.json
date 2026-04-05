@@ -1,13 +1,14 @@
 {
   "name": "@brianyu28/dialexis",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Presentation library built with Presenter.js",
   "main": "dist/dialexis.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/dialexis.mjs"
+      "import": "./dist/dialexis.mjs",
+      "default": "./dist/dialexis.mjs"
     }
   },
   "files": [
