@@ -1,12 +1,12 @@
 {
   "name": "@brianyu28/dialexis",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Presentation library built with Presenter.js",
   "main": "dist/dialexis.mjs",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/dialexis.mjs"
     }
   },
@@ -19,6 +19,10 @@
     "prettier": "prettier . --write --ignore-unknown",
     "prepare": "husky && npm run build",
     "test": "jest --passWithNoTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianyu28/dialexis.git"
   },
   "author": "Brian Yu <brian@brianyu.me>",
   "license": "GPL-3.0-or-later",
