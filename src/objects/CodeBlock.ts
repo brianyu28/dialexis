@@ -263,8 +263,8 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
   const background = Rectangle({
     width: blockWidth + padding * 2,
     height: blockHeight + padding * 2,
-    fill: backgroundColor ?? Color(theme.backgroundColor),
-    rounding: backgroundRounding,
+    fillColor: backgroundColor ?? Color(theme.backgroundColor),
+    cornerRadius: backgroundRounding,
     opacity: isBackgroundVisible ? 1 : 0,
   });
 
@@ -304,8 +304,8 @@ export function CodeBlock(code: CodeBlockContent | string, props: Partial<CodeBl
       focusPaddingX,
       focusPaddingY,
     }),
-    fill: focusColor,
-    rounding: focusRounding,
+    fillColor: focusColor,
+    cornerRadius: focusRounding,
     opacity: isFocusVisible ? 1 : 0,
   });
 

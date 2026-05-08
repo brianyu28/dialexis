@@ -1,6 +1,6 @@
 {
   "name": "@brianyu28/dialexis",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Presentation library built with Presenter.js",
   "main": "dist/dialexis.mjs",
   "types": "dist/index.d.ts",
@@ -44,7 +44,7 @@
     "vite": "^6.1.5"
   },
   "peerDependencies": {
-    "presenter": "^0.7.3"
+    "presenter": "^0.8.0"
   },
   "lint-staged": {
     "**/*": [
