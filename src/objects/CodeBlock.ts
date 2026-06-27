@@ -13,7 +13,7 @@ const LINE_NUMBER_SPACE_CHARS = 2;
 const DEFAULT_CHARACTER_DESCENT_HEIGHT = 0.29;
 const DEFAULT_CHARACTER_WIDTH = 0.6;
 // This value may need to be adjusted depending on font size
-const DEFAULT_LINE_HEIGHT = 1.07;
+const DEFAULT_LINE_HEIGHT = 1.0;
 
 /** Optional additional adjustments to refine location of focus. */
 interface FocusAdjustmentProps {
